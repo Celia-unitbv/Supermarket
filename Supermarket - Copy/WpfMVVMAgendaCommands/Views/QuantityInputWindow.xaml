@@ -1,0 +1,12 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.QuantityInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Introduceți Cantitatea" Height="150" Width="300">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Introduceți cantitatea:" Margin="10"/>
+            <TextBox x:Name="quantityTextBox" Width="200" HorizontalAlignment="Center"/>
+            <Button Content="OK" Width="100" Margin="10" HorizontalAlignment="Center" Click="OkButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

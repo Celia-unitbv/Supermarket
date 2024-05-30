@@ -1,0 +1,105 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMAgendaCommands.Views"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/supermarket.jpg" Opacity="0.4"/>
+            </Grid.Background>
+
+            <!-- Produse -->
+            <TextBox HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Produse" VerticalAlignment="Top" Width="120"/>
+            <ListBox x:Name="productListBox" ItemsSource="{Binding ProdusVM.ProduseList}" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Height="80" Width="644">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding NumeProdus}" Margin="5"/>
+                            <TextBlock Text="{Binding CodBare}" Margin="5"/>
+                            <TextBlock Text="{Binding Categorie.NumeCategorie}" Margin="5"/>
+                            <TextBlock Text="{Binding Producator.NumeProducator}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="EditButtonProduct_Click"/>
+                        <MenuItem Header="Delete" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="DeleteButtonProduct_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+
+            <!-- Producatori -->
+            <Button Content="Adaugă Producător" HorizontalAlignment="Left" Margin="690,241,0,0" VerticalAlignment="Top" Click="AddProducerButton_Click"/>
+            <TextBox HorizontalAlignment="Left" Margin="10,193,0,0" TextWrapping="Wrap" Text="Producatori" VerticalAlignment="Top" Width="120"/>
+            <ListBox x:Name="producerListBox" ItemsSource="{Binding ProducatorVM.ProducatorList}" HorizontalAlignment="Left" Margin="10,216,0,0" VerticalAlignment="Top" Height="80" Width="644">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding NumeProducator}" Margin="5"/>
+                            <TextBlock Text="{Binding TaraOrigine}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="EditButtonProducer_Click"/>
+                        <MenuItem Header="Delete" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="DeleteButtonProducer_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+
+            <!-- Categorii -->
+            <Button Content="Adaugă Categorie" HorizontalAlignment="Left" Margin="691,362,0,0" VerticalAlignment="Top" Click="AddCategoryButton_Click"/>
+            <TextBox HorizontalAlignment="Left" Margin="10,309,0,0" TextWrapping="Wrap" Text="Categorii" VerticalAlignment="Top" Width="120"/>
+            <ListBox x:Name="categoryListBox" ItemsSource="{Binding CategoryVM.CategorieList}" HorizontalAlignment="Left" Margin="10,332,0,0" VerticalAlignment="Top" Height="80" Width="644">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding NumeCategorie}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="EditButtonCategory_Click"/>
+                        <MenuItem Header="Delete" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Click="DeleteButtonCategory_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+
+            <!-- Buton pentru adaugare produs -->
+            <Button Content="Adaugă" HorizontalAlignment="Left" Margin="700,121,0,0" VerticalAlignment="Top" Click="AddButton_Click"/>
+            <Button Content="Search Products" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="150" Click="OpenSearchWindow_Click"/>
+            <Button Content="Category Values" HorizontalAlignment="Left" Margin="499,0,0,0" VerticalAlignment="Top" Width="107" Click="OpenCategoryValuesWindow_Click" Height="31"/>
+            <Button Content="Vizualizează Vânzări Utilizator" HorizontalAlignment="Left" Margin="127,11,0,0" VerticalAlignment="Top" Click="ViewUserSalesButton_Click"/>
+            <Button Content="Cel Mai Mare Bon" HorizontalAlignment="Left" Margin="647,6,0,0" VerticalAlignment="Top" Click="ViewLargestReceiptButton_Click"/>
+
+            <!-- Stocuri -->
+            <TextBox HorizontalAlignment="Left" Margin="10,450,0,0" TextWrapping="Wrap" Text="Stocuri" VerticalAlignment="Top" Width="120"/>
+            <ListBox x:Name="stocListBox" ItemsSource="{Binding StocuriVM.Stocuri}" HorizontalAlignment="Left" Margin="10,473,0,0" VerticalAlignment="Top" Height="80" Width="644">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Produs}" Margin="5"/>
+                            <TextBlock Text="{Binding Cantitate}" Margin="5"/>
+                            <TextBlock Text="{Binding PretAchizitie}" Margin="5"/>
+                            <TextBlock Text="{Binding PretVanzare}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Buton pentru adaugare stoc -->
+            <Button Content="Adaugă Stoc" HorizontalAlignment="Left" Margin="700,473,0,0" VerticalAlignment="Top" Click="AddStocButton_Click"/>
+            <Button Content="Oferte" HorizontalAlignment="Left" Margin="392,43,0,0" VerticalAlignment="Top" Click="ViewOferteButton_Click"/>
+
+
+
+        </Grid>
+    </ScrollViewer>
+</Window>

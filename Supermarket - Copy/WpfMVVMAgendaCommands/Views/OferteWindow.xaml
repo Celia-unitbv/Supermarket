@@ -1,0 +1,38 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.OferteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Oferte" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Content="Oferte Expirare"/>
+            <ListBox x:Name="expirareListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Produs}" Margin="5"/>
+                            <TextBlock Text="{Binding NumeProdus}" Margin="5"/>
+                            <TextBlock Text="{Binding Cantitate}" Margin="5"/>
+                            <TextBlock Text="{Binding PretVanzare}" Margin="5"/>
+                            <TextBlock Text="{Binding PretReducere}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Label Content="Oferte Lichidare Stoc"/>
+            <ListBox x:Name="lichidareListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Produs}" Margin="5"/>
+                            <TextBlock Text="{Binding NumeProdus}" Margin="5"/>
+                            <TextBlock Text="{Binding Cantitate}" Margin="5"/>
+                            <TextBlock Text="{Binding PretVanzare}" Margin="5"/>
+                            <TextBlock Text="{Binding PretReducere}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>

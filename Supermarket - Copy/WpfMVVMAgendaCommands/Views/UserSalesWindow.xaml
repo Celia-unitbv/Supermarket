@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.UserSalesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMAgendaCommands.Views"
+        mc:Ignorable="d"
+        Title="User Sales" Height="400" Width="600">
+    <Grid>
+        <StackPanel>
+            <ComboBox x:Name="userComboBox" Width="200" Margin="10" DisplayMemberPath="NumeUtilizator" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding Users}"/>
+            <DatePicker x:Name="monthPicker" Width="200" Margin="10" SelectedDate="{Binding SelectedMonth}"/>
+            <Button Content="Search" Width="100" Margin="10" Click="SearchButton_Click"/>
+            <ListBox x:Name="salesListBox" ItemsSource="{Binding DailySales}" DisplayMemberPath="DisplayText" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

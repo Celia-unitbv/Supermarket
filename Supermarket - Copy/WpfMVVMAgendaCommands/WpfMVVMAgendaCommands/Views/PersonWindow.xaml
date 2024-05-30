@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.PersonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctx="clr-namespace:WpfMVVMAgendaCommands.ViewModels"
+        xmlns:convert="clr-namespace:WpfMVVMAgendaCommands.Converters"
+        Title="PersonWindow" Height="485" Width="455">
+    <Window.DataContext>
+        <ctx:PersonVM/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel.Resources>
+            <convert:PersonConvert x:Key="personConvert" />
+        </StackPanel.Resources>
+        <WrapPanel>
+            <Button Content="Adauga" Margin="15" Width="100" Height="30" 
+                    Command="{Binding AddCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource personConvert}">
+                        <Binding ElementName="txtName" Path="Text"/>
+                        <Binding ElementName="txtAddress" Path="Text"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Modifica" Margin="15" Width="100" Height="30" Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding ElementName=personsGrid, Path=SelectedItem}"/>
+            <Button Content="Sterge" Margin="15" Width="100" Height="30" Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=personsGrid, Path=SelectedItem}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" FontSize="15">Nume:</Label>
+            <TextBox Name="txtName" Width="200" Text ="{Binding ElementName=personsGrid, 
+                Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" FontSize="15">Adresa:</Label>
+            <TextBox Name="txtAddress" Width="200" Text ="{Binding ElementName=personsGrid, 
+                Path=SelectedItem.Address, UpdateSourceTrigger=PropertyChanged}"/>
+        </WrapPanel>
+        <DataGrid Name="personsGrid" AutoGenerateColumns="False" Margin="0,15,0,0" Height="250"
+                  ItemsSource="{Binding PersonsList}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nume" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Adresa" Binding="{Binding Address}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>

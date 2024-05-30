@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.CashierWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMAgendaCommands.Views"
+        mc:Ignorable="d"
+        Title="CashierWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/supermarket.jpg" Opacity="0.4"/>
+            </Grid.Background>
+        </Grid>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
+            <TextBox x:Name="searchTextBox" Width="200" Margin="0,10,0,0"/>
+            <DatePicker x:Name="expiryDatePicker" Width="200" Margin="0,10,0,0"/>
+            <Button Content="Căutare Produs" Width="200" Click="SearchButton_Click"/>
+            <ListBox x:Name="searchResultsListBox" Width="200" Height="300" DisplayMemberPath="NumeProdus" MouseDoubleClick="ProductListBox_MouseDoubleClick">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Adaugă" Click="AddProduct_Click"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="10">
+            <ListBox x:Name="bonListBox" Width="400" Height="300">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Cantitate}" Margin="5"/>
+                            <TextBlock Text=" x " Margin="5"/>
+                            <TextBlock Text="{Binding NumeProdus}" Margin="5"/>
+                            <TextBlock Text=".........." Margin="5"/>
+                            <TextBlock Text="{Binding Subtotal, StringFormat={}{0:C2}}" Margin="5"/>
+                            <TextBlock Text="lei" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock x:Name="totalTextBlock" FontWeight="Bold" FontSize="16" Margin="10"/>
+            <Button Content="Finalizează Bonul" Width="200" Click="FinalizeBonButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.EditProducerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMAgendaCommands.Views"
+        xmlns:viewModels="clr-namespace:WpfMVVMAgendaCommands.ViewModels"
+        mc:Ignorable="d"
+        Title="EditProducerWindow" Height="235" Width="400">
+
+    <Window.DataContext>
+        <viewModels:ProducatorVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="295" Height="170">
+            <TextBlock HorizontalAlignment="Center" Height="31" Margin="0,10,0,0" TextWrapping="Wrap" Text="Editează Producătorul" VerticalAlignment="Top" Width="198" FontSize="20" FontWeight="Bold"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="24,60,0,0" TextWrapping="Wrap" Text="Nume" VerticalAlignment="Top" Height="23" Width="65" FontSize="15"/>
+            <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="89,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Text="{Binding NumeProducator, Mode=TwoWay}"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="24,100,0,0" TextWrapping="Wrap" Text="Țara" VerticalAlignment="Top" Height="23" Width="65" FontSize="15"/>
+            <TextBox x:Name="countryTextBox" HorizontalAlignment="Left" Margin="89,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Text="{Binding TaraOrigine, Mode=TwoWay}"/>
+
+            <Button Content="Salvează" HorizontalAlignment="Center" Margin="0,140,0,0" VerticalAlignment="Top" Width="80" Click="SaveButton_Click" Height="30"/>
+        </Grid>
+    </Grid>
+</Window>

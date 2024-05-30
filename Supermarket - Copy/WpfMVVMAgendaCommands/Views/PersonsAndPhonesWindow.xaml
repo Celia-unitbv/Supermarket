@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.PersonsAndPhonesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctx="clr-namespace:WpfMVVMAgendaCommands.ViewModels"
+        Title="PersonsAndPhonesWindow" Height="300" Width="300">
+    <Window.DataContext>
+        <ctx:PersonsAndPhonesVM />
+    </Window.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/blue-butterfly.png" Opacity="0.4"/>
+        </Grid.Background>
+        <ListBox Name="listPersWoPhone" ItemsSource="{Binding Agenda}"
+                 Width="250" Height="250">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Key.Name}" ContentStringFormat="Persoana: {0}" FontWeight="Bold"/>
+                        <ItemsControl ItemsSource="{Binding Value}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <Label Content="{Binding PhoneNumber}" />
+                                        <Label Content="{Binding Description}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

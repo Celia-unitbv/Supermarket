@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfMVVMAgendaCommands.Views.PhoneWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctx="clr-namespace:WpfMVVMAgendaCommands.ViewModels"
+        xmlns:convert="clr-namespace:WpfMVVMAgendaCommands.Converters"
+        xmlns:Triggers="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:behavior="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+        Title="PhoneWindow" Height="530" Width="455">
+    <!-- AttachedCommandBehavior se adauga de la NuGet Package Manager -->
+    <Window.DataContext>
+        <ctx:PhoneVM />
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel.Resources>
+            <convert:PhoneConvert x:Key="phoneConvert" />
+        </StackPanel.Resources>
+        <WrapPanel>
+            <Button Content="Adauga" Margin="15" Width="100" Height="30" Command="{Binding AddCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource phoneConvert}">
+                        <Binding ElementName="comboPers" Path="SelectedItem.PersonID"/>
+                        <Binding ElementName="txtNumber" Path="Text"/>
+                        <Binding ElementName="txtDescription" Path="Text"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Modifica" Margin="15" Width="100" Height="30" Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding ElementName=phonesGrid, Path=SelectedItem}"/>
+            <Button Content="Sterge" Margin="15" Width="100" Height="30" Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=phonesGrid, Path=SelectedItem}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" FontSize="15">Persoana:</Label>
+            <ComboBox Name="comboPers" Width="200" ItemsSource="{Binding PersonsList}" SelectedIndex="0"
+                      DisplayMemberPath="Name" SelectedValue="{Binding PersonId}"
+                      behavior:CommandBehavior.Command="{Binding ChangePersonCommand}"
+                      behavior:CommandBehavior.CommandParameter="{Binding SelectedItem, ElementName=comboPers}"
+                      behavior:CommandBehavior.Event="SelectionChanged">
+                <!--<Triggers:Interaction.Triggers>
+                    <Triggers:EventTrigger EventName="SelectionChanged">
+                        <Triggers:InvokeCommandAction 
+                            Command="{Binding ChangePersonCommand}" 
+                            CommandParameter="{Binding SelectedItem, ElementName=comboPers}"/>
+                    </Triggers:EventTrigger>
+                </Triggers:Interaction.Triggers>-->
+            </ComboBox>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" FontSize="15">Nr telefon:</Label>
+            <TextBox Name="txtNumber" Width="200" Text="{Binding ElementName=phonesGrid, 
+                Path=SelectedItem.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" FontSize="15">Descriere:</Label>
+            <TextBox Name="txtDescription" Width="200" Text ="{Binding ElementName=phonesGrid, 
+                Path=SelectedItem.Description, UpdateSourceTrigger=PropertyChanged}" />
+        </WrapPanel>
+        <WrapPanel>
+            <Label Content="{Binding ErrorMessage}" FontSize="15" Foreground="Red" Height="30"/>
+        </WrapPanel>
+        <DataGrid Name="phonesGrid"  Margin="0,15,0,0" AutoGenerateColumns="False" Height="250"
+                  ItemsSource="{Binding PhonesList}" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nr telefon" Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Header="Descriere" Binding="{Binding Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>
